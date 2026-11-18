@@ -46,4 +46,14 @@ suite('markdown.api.render', () => {
     assert.match(html, /<ul [^>]*class="task-list-container code-line"/);
     assert.match(html, /<li [^>]*class="task-list-item code-line"/);
   });
+
+  test('renders an alert with its title and icon', async () => {
+    const html = await render('> [!TIP]\n> Text.\n');
+
+    assert.match(html, /<div [^>]*class="markdown-alert markdown-alert-tip /);
+    assert.match(
+      html,
+      /<p [^>]*class="markdown-alert-title code-line"[^>]*><svg class="octicon octicon-light-bulb" aria-hidden="true" fill="currentColor" [^>]*><path d="[^"]+"\/><\/svg>Tip<\/p>/,
+    );
+  });
 });

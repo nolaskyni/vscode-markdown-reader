@@ -11,3 +11,4 @@ scripts/**
 src/**
 test/**
 tsconfig.json
+vitest.config.ts
