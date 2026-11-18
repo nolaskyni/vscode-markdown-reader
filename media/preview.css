@@ -1,5 +1,7 @@
-/* Alerts. GitHub puts 8px between the icon and the title, and centers them. */
+/* Alerts. */
 
+/* GitHub puts 8 pixels between the icon and the title and centers them
+vertically. */
 .markdown-alert-title {
   align-items: center;
   display: flex;
