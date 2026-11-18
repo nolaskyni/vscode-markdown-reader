@@ -12,6 +12,7 @@
     "type": "git",
     "url": "https://github.com/nolaskyni/vscode-markdown-reader.git"
   },
+  "publisher": "nolaskyni",
   "main": "./dist/extension.js",
   "scripts": {
     "build": "node scripts/build.ts",
