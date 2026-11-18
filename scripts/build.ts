@@ -1,11 +1,17 @@
 /**
- * @file Bundles the extension and its VS Code integration tests with esbuild.
- *   Run it with `npm run build`. Node runs this file directly, so it uses only
+ * @file Bundles the extension and its VS Code integration tests with esbuild,
+ *   and writes the license notices of the packages in the extension bundle. Run
+ *   it with `npm run build`. Node runs this file directly, so it uses only
  *   erasable TypeScript syntax.
  */
 
 import {build} from 'esbuild';
-import {glob, rm} from 'node:fs/promises';
+import {glob, rm, writeFile} from 'node:fs/promises';
+import {
+  bundledPackageDirectories,
+  readBundledPackage,
+  thirdPartyNotices,
+} from './third-party-notices.ts';
 
 // Remove earlier output, so that deleted sources and tests don't leave stale
 // bundles that `vscode-test` still runs.
@@ -17,7 +23,7 @@ for await (const path of glob('test/vscode/**/*.test.ts')) {
   integrationTestEntryPoints.push(path);
 }
 
-await build({
+const extensionBuild = await build({
   entryPoints: ['src/extension.ts'],
   outfile: 'dist/extension.js',
   bundle: true,
@@ -26,8 +32,16 @@ await build({
   target: 'node22',
   external: ['vscode'],
   sourcemap: true,
+  metafile: true,
   logLevel: 'info',
 });
+
+const bundledPackages = await Promise.all(
+  bundledPackageDirectories(Object.keys(extensionBuild.metafile.inputs)).map(
+    readBundledPackage,
+  ),
+);
+await writeFile('ThirdPartyNotices.txt', thirdPartyNotices(bundledPackages));
 
 await build({
   entryPoints: integrationTestEntryPoints,

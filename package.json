@@ -19,7 +19,7 @@
     "format": "oxfmt",
     "lint": "oxlint --type-aware",
     "lint:markdown": "markdownlint-cli2 '**/*.md'",
-    "test:unit": "vitest run --dir src",
+    "test:unit": "vitest run src/ scripts/",
     "test:vscode": "npm run build && vscode-test",
     "vscode:prepublish": "npm run build"
   },
