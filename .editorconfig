@@ -1,0 +1,22 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Jupyter writes notebooks with 1-space indentation.
+[*.ipynb]
+indent_size = 1
+
+[*.{css,json,jsonc,md,ts}]
+max_line_length = 80
+
+# VS Code writes its own settings files with 4-space indentation. Many
+# EditorConfig tools match `**/.vscode/*.json` only in subfolders, so the
+# section also lists `.vscode/*.json` for the folder at the project root.
+[{.vscode/*.json,**/.vscode/*.json,**.code-workspace,**/Code/User/**.json}]
+indent_size = 4

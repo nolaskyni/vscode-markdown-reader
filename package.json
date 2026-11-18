@@ -1,0 +1,47 @@
+{
+  "name": "markdown-reader",
+  "displayName": "Markdown Reader",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Styles the Markdown preview and notebook Markdown cells for comfortable reading.",
+  "categories": [
+    "Other"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nolaskyni/vscode-markdown-reader.git"
+  },
+  "main": "./dist/extension.js",
+  "scripts": {
+    "build": "node scripts/build.ts",
+    "check-types": "tsc",
+    "format": "oxfmt",
+    "lint": "oxlint --type-aware",
+    "lint:markdown": "markdownlint-cli2 '**/*.md'",
+    "test:vscode": "npm run build && vscode-test",
+    "vscode:prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "@types/mocha": "10.0.10",
+    "@types/node": "26.6.6",
+    "@types/vscode": "1.146.0",
+    "@vscode/test-cli": "0.0.15",
+    "@vscode/test-electron": "3.1.0",
+    "esbuild": "0.28.2",
+    "markdown-it": "15.0.3",
+    "markdownlint-cli2": "0.24.1",
+    "oxfmt": "0.79.0",
+    "oxlint": "1.94.0",
+    "oxlint-tsgolint": "7.0.2007",
+    "typescript": "7.0.2",
+    "vitest": "5.1.0"
+  },
+  "contributes": {
+    "markdown.markdownItPlugins": true
+  },
+  "activationEvents": [],
+  "engines": {
+    "vscode": "^1.146.0"
+  }
+}

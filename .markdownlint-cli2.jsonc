@@ -1,0 +1,5 @@
+{
+  // Skip downloaded and generated files, such as the copy of VS Code in
+  // `.vscode-test/`.
+  "gitignore": true
+}

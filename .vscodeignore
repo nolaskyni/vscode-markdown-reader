@@ -1,0 +1,13 @@
+.*
+.vscode/**
+.vscode-test/**
+**/*.map
+AGENTS.md
+fixtures/**
+node_modules/**
+out/**
+plans/**
+scripts/**
+src/**
+test/**
+tsconfig.json

@@ -1,0 +1,20 @@
+{
+  "default": true,
+  "heading-style": {"style": "atx"},
+  "ul-style": {"style": "dash"},
+  "ul-indent": {"indent": 2},
+  "line-length": {
+    "line_length": 80,
+    "tables": false,
+    "headings": false,
+    "code_blocks": false
+  },
+  // `<source>` and `<img>` are for `<picture>`. markdownlint can't limit them
+  // to it, so the Markdown reference bans a standalone `<img>`.
+  "no-inline-html": {"allowed_elements": ["kbd", "picture", "source", "img"]},
+  "hr-style": {"style": "---"},
+  "code-block-style": {"style": "fenced"},
+  "code-fence-style": {"style": "backtick"},
+  "emphasis-style": {"style": "underscore"},
+  "strong-style": {"style": "asterisk"}
+}
