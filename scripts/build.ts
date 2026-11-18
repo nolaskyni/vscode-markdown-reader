@@ -5,7 +5,12 @@
  */
 
 import {build} from 'esbuild';
-import {glob} from 'node:fs/promises';
+import {glob, rm} from 'node:fs/promises';
+
+// Remove earlier output, so that deleted sources and tests don't leave stale
+// bundles that `vscode-test` still runs.
+await rm('dist', {recursive: true, force: true});
+await rm('out', {recursive: true, force: true});
 
 const integrationTestEntryPoints: string[] = [];
 for await (const path of glob('test/vscode/**/*.test.ts')) {

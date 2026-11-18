@@ -4,6 +4,7 @@
  */
 
 import type {MarkdownIt} from 'markdown-it';
+import {addPreviewSyntax} from './preview-syntax.ts';
 
 /** The hooks that the built-in Markdown extension reads from `activate`. */
 export interface MarkdownPreviewHooks {
@@ -18,5 +19,5 @@ export interface MarkdownPreviewHooks {
  * @returns The hooks that the built-in Markdown preview calls.
  */
 export function activate(): MarkdownPreviewHooks {
-  return {extendMarkdownIt: (markdownIt) => markdownIt};
+  return {extendMarkdownIt: addPreviewSyntax};
 }
