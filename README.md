@@ -7,8 +7,9 @@ Code theme.
 
 ## Status
 
-Markdown Reader is in development and has no release. The "Features" section
-describes planned behavior, not working features.
+Markdown Reader is in development and has no release. Of the features in the
+[Features](#features) section, only task lists in the Markdown preview work. The
+other features are planned.
 
 ## Features
 
