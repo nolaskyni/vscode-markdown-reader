@@ -102,13 +102,21 @@ tr:nth-child(2n) {
 }
 
 /* The browser draws a disabled checkbox faintly, so the box and checkmark are
-drawn here in the theme's checkbox colors. The checkbox stays disabled. Form
-controls default to a smaller font, so the checkbox inherits the text's size,
-which its `em` values use. */
+drawn here in the theme's checkbox colors. The border takes 40 percent of the
+text color, because some themes' checkbox borders barely differ from the
+background, and the box is all that shows an unchecked task. That brings the
+edge to WCAG's 3:1 in VS Code's built-in themes. The checkbox stays disabled.
+Form controls default to a smaller font, so the checkbox inherits the text's
+size, which its `em` values use. */
 .task-list-item-checkbox {
   appearance: none;
   background-color: var(--vscode-checkbox-background);
-  border: 1px solid var(--vscode-checkbox-border);
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--vscode-checkbox-border) 60%,
+      var(--vscode-editor-foreground)
+    );
   border-radius: 3px;
   font-size: inherit;
   height: 0.875em;
@@ -149,10 +157,17 @@ which its `em` values use. */
 }
 
 /* GitHub puts 8 pixels between the icon and the title and centers them
-vertically. */
+vertically. Some themes' chart colors are too faint for text, so the title and
+its icon take 35 percent of the text color, which contrasts with the
+background. That brings every title to WCAG's 4.5:1 in VS Code's built-in
+themes. */
 .markdown-alert-title {
   align-items: center;
-  color: var(--markdown-reader-alert-color);
+  color: color-mix(
+    in srgb,
+    var(--markdown-reader-alert-color) 65%,
+    var(--vscode-editor-foreground)
+  );
   display: flex;
   font-weight: 500;
   gap: 8px;
