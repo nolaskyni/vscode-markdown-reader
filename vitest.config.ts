@@ -1,8 +1,8 @@
 /**
  * @file Configures Vitest. esbuild loads an SVG file as a string when the
- *   import has the `type: 'text'` attribute, but Vite ignores the attribute
- *   and returns the file's URL. The plugin here loads every SVG file as a
- *   string, so that unit tests see what the extension bundle contains.
+ *   import has the `type: 'text'` attribute, but Vite ignores the attribute and
+ *   returns the file's URL. The plugin here loads every SVG file as a string,
+ *   so that unit tests see what the extension bundle contains.
  */
 
 import {readFile} from 'node:fs/promises';
