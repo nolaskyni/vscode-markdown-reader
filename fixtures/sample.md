@@ -119,8 +119,9 @@ footnote link.
 | Alerts     | Yes     | No       | Five GitHub types                                                        |
 | Footnotes  | Yes     | No       | A very long cell that makes the table wider than a narrow preview window |
 
-Expected: the table has borders and alternating row backgrounds, and a table
-wider than the preview scrolls horizontally.
+Expected: the table has borders and alternating row backgrounds. Long cells
+wrap, as on GitHub, and a table whose columns can't fit scrolls horizontally on
+its own.
 
 ## Block Quotes
 
