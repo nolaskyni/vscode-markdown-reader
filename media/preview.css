@@ -101,9 +101,35 @@ tr:nth-child(2n) {
   list-style-type: none;
 }
 
+/* The browser draws a disabled checkbox faintly, so the box and checkmark are
+drawn here in the theme's checkbox colors. The checkbox stays disabled. Form
+controls default to a smaller font, so the checkbox inherits the text's size,
+which its `em` values use. */
 .task-list-item-checkbox {
+  appearance: none;
+  background-color: var(--vscode-checkbox-background);
+  border: 1px solid var(--vscode-checkbox-border);
+  border-radius: 3px;
+  font-size: inherit;
+  height: 0.875em;
   margin: 0 0.2em 0.25em -1.4em;
+  position: relative;
   vertical-align: middle;
+  width: 0.875em;
+}
+
+/* The checkmark is the bottom and right borders of a box, rotated. */
+.task-list-item-checkbox:checked::before {
+  border-color: var(--vscode-checkbox-foreground);
+  border-style: solid;
+  border-width: 0 0.125em 0.125em 0;
+  content: '';
+  height: 0.45em;
+  inset: 0;
+  margin: auto;
+  position: absolute;
+  transform: translateY(-0.05em) rotate(45deg);
+  width: 0.2em;
 }
 
 /* Alerts. */
