@@ -60,6 +60,13 @@ Check changes as follows:
 - Report which checks ran, what they establish, and what remains unverified.
   Don't describe untested behavior as working.
 
+## Update the Changelog
+
+Record each change that users notice in the `CHANGELOG.md` file, under the
+"Unreleased" heading, by following
+[Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/). Give a version
+its own heading and date only when it's released.
+
 ## Write Commit Messages
 
 Follow `commit-message-guidelines` for commit messages. Don't add agent
