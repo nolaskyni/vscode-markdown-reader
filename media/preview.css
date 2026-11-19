@@ -1,9 +1,194 @@
+/* Theme colors and layout. */
+
+/* Colors come from the theme. Colors that themes don't define are mixed from
+the theme's text color: the built-in preview uses the same 18 percent for its
+borders but hard-codes black or white. The `markdown.preview.fontSize` and
+`markdown.preview.lineHeight` settings set the text size, through the defaults
+in `package.json`. The inline margins are set alone, because the built-in
+preview sets a bottom margin on `.scrollBeyondLastLine`. */
+.vscode-body {
+  --markdown-reader-alternate-row-background: color-mix(
+    in srgb,
+    var(--vscode-editor-foreground) 4%,
+    transparent
+  );
+  --markdown-reader-divider-color: color-mix(
+    in srgb,
+    var(--vscode-editor-foreground) 18%,
+    transparent
+  );
+  /* stylelint-disable-next-line custom-property-pattern -- VS Code names this theme variable. */
+  --markdown-reader-focus-color: var(--vscode-focusBorder);
+  /* stylelint-disable-next-line custom-property-pattern -- VS Code names this theme variable. */
+  --markdown-reader-muted-color: var(--vscode-descriptionForeground);
+
+  margin-inline: auto;
+  max-width: 42em;
+  padding-inline: 32px;
+}
+
+/* High-contrast themes outline everything in their contrast border color. */
+.vscode-high-contrast {
+  /* stylelint-disable-next-line custom-property-pattern -- VS Code names this theme variable. */
+  --markdown-reader-divider-color: var(--vscode-contrastBorder);
+}
+
+/* The built-in preview pads both `html` and `body`. */
+html {
+  padding-inline: 0;
+}
+
+/* Dividers. The built-in preview's selectors, such as `.vscode-light td`,
+include a theme class, so these selectors need one too. */
+
+.vscode-body h1,
+.vscode-body h2,
+.vscode-body hr {
+  border-color: var(--markdown-reader-divider-color);
+}
+
+/* Code. */
+
+code {
+  font-family:
+    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono',
+    monospace;
+  font-size: 0.85em;
+}
+
+/* Block quotes. */
+
+blockquote {
+  background-color: transparent;
+  border-left-width: 0.25em;
+  border-radius: 0;
+  color: var(--markdown-reader-muted-color);
+  margin-bottom: 16px;
+  padding: 0 1em;
+}
+
+blockquote > :first-child {
+  margin-top: 0;
+}
+
+blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+/* Tables. A table wider than the preview scrolls on its own, as on GitHub. */
+
+table {
+  display: block;
+  margin-bottom: 16px;
+  max-width: 100%;
+  overflow: auto;
+  width: max-content;
+}
+
+.vscode-body th,
+.vscode-body td {
+  border: 1px solid var(--markdown-reader-divider-color);
+  padding: 6px 13px;
+}
+
+tr:nth-child(2n) {
+  background-color: var(--markdown-reader-alternate-row-background);
+}
+
+/* Task lists. The checkbox sits where the list marker would be. */
+
+.task-list-item {
+  list-style-type: none;
+}
+
+.task-list-item-checkbox {
+  margin: 0 0.2em 0.25em -1.4em;
+  vertical-align: middle;
+}
+
 /* Alerts. */
+
+.markdown-alert {
+  border-left: 0.25em solid var(--markdown-reader-alert-color);
+  margin-bottom: 16px;
+  padding: 0.5em 1em;
+}
+
+.markdown-alert > :first-child {
+  margin-top: 0;
+}
+
+.markdown-alert > :last-child {
+  margin-bottom: 0;
+}
 
 /* GitHub puts 8 pixels between the icon and the title and centers them
 vertically. */
 .markdown-alert-title {
   align-items: center;
+  color: var(--markdown-reader-alert-color);
   display: flex;
+  font-weight: 500;
   gap: 8px;
+  line-height: 1;
+}
+
+/* Each alert type takes the theme's chart color nearest GitHub's hue. */
+.markdown-alert-note {
+  --markdown-reader-alert-color: var(--vscode-charts-blue);
+}
+
+.markdown-alert-tip {
+  --markdown-reader-alert-color: var(--vscode-charts-green);
+}
+
+.markdown-alert-important {
+  --markdown-reader-alert-color: var(--vscode-charts-purple);
+}
+
+.markdown-alert-warning {
+  --markdown-reader-alert-color: var(--vscode-charts-yellow);
+}
+
+.markdown-alert-caution {
+  --markdown-reader-alert-color: var(--vscode-charts-red);
+}
+
+/* Footnotes. The plugin's `hr` above the notes draws the line that GitHub draws
+as a top border. */
+
+/* GitHub's HTML has the bare number, and its CSS adds the brackets. */
+.footnote-ref a[href]::before {
+  content: '[';
+}
+
+.footnote-ref a[href]::after {
+  content: ']';
+}
+
+.footnotes {
+  color: var(--markdown-reader-muted-color);
+  font-size: 0.85em;
+}
+
+.footnotes-list {
+  padding-left: 1em;
+}
+
+.footnote-item {
+  position: relative;
+}
+
+/* Outlines the note that a reference link jumped to, including its number. */
+.footnote-item:target {
+  color: var(--vscode-editor-foreground);
+}
+
+.footnote-item:target::before {
+  border: 2px solid var(--markdown-reader-focus-color);
+  border-radius: 6px;
+  content: '';
+  inset: -0.5em -0.5em -0.5em -1.5em;
+  pointer-events: none;
+  position: absolute;
 }

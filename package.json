@@ -50,6 +50,10 @@
     "vitest": "5.1.0"
   },
   "contributes": {
+    "configurationDefaults": {
+      "markdown.preview.fontSize": 17,
+      "markdown.preview.lineHeight": 1.65
+    },
     "markdown.markdownItPlugins": true,
     "markdown.previewStyles": [
       "./media/preview.css"
