@@ -183,15 +183,6 @@ vertically. */
 /* Footnotes. The plugin's `hr` above the notes draws the line that GitHub draws
 as a top border. */
 
-/* GitHub's HTML has the bare number, and its CSS adds the brackets. */
-.footnote-ref a[href]::before {
-  content: '[';
-}
-
-.footnote-ref a[href]::after {
-  content: ']';
-}
-
 .footnotes {
   color: var(--markdown-reader-muted-color);
   font-size: 0.85em;
