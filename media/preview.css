@@ -4,8 +4,10 @@
 the theme's text color: the built-in preview uses the same 18 percent for its
 borders but hard-codes black or white. The `markdown.preview.fontSize` and
 `markdown.preview.lineHeight` settings set the text size, through the defaults
-in `package.json`. The inline margins are set alone, because the built-in
-preview sets a bottom margin on `.scrollBeyondLastLine`. */
+in `package.json`. The text column is as wide as GitHub's: github-markdown-css
+suggests a 980-pixel page with 45 pixels of padding, which leaves 890 pixels,
+or about `52em` at 17 pixels. The inline margins are set alone, because the
+built-in preview sets a bottom margin on `.scrollBeyondLastLine`. */
 .vscode-body {
   --markdown-reader-alternate-row-background: color-mix(
     in srgb,
@@ -23,7 +25,7 @@ preview sets a bottom margin on `.scrollBeyondLastLine`. */
   --markdown-reader-muted-color: var(--vscode-descriptionForeground);
 
   margin-inline: auto;
-  max-width: 42em;
+  max-width: 52em;
   padding-inline: 32px;
 }
 

@@ -37,7 +37,7 @@ root. Lines are as long as in the preview, but the text stays at the left, in
 line with code cells. The host keeps its full width, because it draws the
 selected cell's background. */
 :host > div {
-  max-width: 42em;
+  max-width: 52em;
 }
 
 /* Spacing, as in the Markdown preview. */
