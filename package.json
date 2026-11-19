@@ -76,5 +76,10 @@
   "activationEvents": [],
   "engines": {
     "vscode": "^1.146.0"
+  },
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    }
   }
 }
