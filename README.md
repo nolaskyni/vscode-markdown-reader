@@ -43,6 +43,58 @@ settings, so your own values for those settings still apply:
 The font sizes are in pixels. The notebook line height is in pixels, and the
 preview line height is a multiple of the font size.
 
+## Install from Source
+
+Markdown Reader has no release, so you build it from source and install the
+package. You need VS Code 1.146 or later, Git, and Node.js 22.18 or later.
+
+To build and install Markdown Reader, follow these steps:
+
+1. Clone the repository:
+
+   ```sh
+   git clone https://github.com/nolaskyni/vscode-markdown-reader.git
+   ```
+
+2. Go to the repository's folder:
+
+   ```sh
+   cd vscode-markdown-reader
+   ```
+
+3. Install the dependencies:
+
+   ```sh
+   npm ci
+   ```
+
+   npm might warn that a development tool needs a later release of Node.js, or
+   that it didn't run some install scripts. The build doesn't need that tool or
+   those scripts.
+
+4. Build Markdown Reader, and package it as a VSIX file, the package format of
+   VS Code extensions:
+
+   ```sh
+   npx vsce package
+   ```
+
+   The command writes the `markdown-reader-0.1.0.vsix` file to the repository's
+   folder.
+
+5. Install the package:
+
+   ```sh
+   code --install-extension markdown-reader-0.1.0.vsix
+   ```
+
+   If the `code` command isn't available, install the package from VS Code
+   instead. In the Command Palette, run **Extensions: Install from VSIX...**,
+   and select the `markdown-reader-0.1.0.vsix` file.
+
+For more information about the changes in each version, see the
+[changelog](CHANGELOG.md).
+
 ## AI Usage
 
 AI assists with designing, writing, reviewing, and testing the extension, with
