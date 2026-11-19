@@ -56,4 +56,17 @@ suite('markdown.api.render', () => {
       /<p [^>]*class="markdown-alert-title code-line"[^>]*><svg class="octicon octicon-light-bulb" aria-hidden="true" fill="currentColor" [^>]*><path d="[^"]+"\/><\/svg>Tip<\/p>/,
     );
   });
+
+  test('renders a footnote reference and its note', async () => {
+    const html = await render('A claim.[^source]\n\n[^source]: The source.\n');
+
+    assert.match(
+      html,
+      /<sup class="footnote-ref"><a href="#footnote1">1<\/a><a class="footnote-anchor" id="footnote-ref1"><\/a><\/sup>/,
+    );
+    assert.match(
+      html,
+      /<li id="footnote1" class="footnote-item"><p [^>]*>The source\. <a href="#footnote-ref1" class="footnote-backref" aria-label="Back to reference 1">/,
+    );
+  });
 });

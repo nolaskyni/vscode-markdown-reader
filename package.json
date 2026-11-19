@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@mdit/plugin-alert": "2.2.0",
+    "@mdit/plugin-footnote": "1.2.0",
     "@mdit/plugin-tasklist": "1.3.0",
     "@primer/octicons": "19.42.0",
     "@types/mocha": "10.0.10",
