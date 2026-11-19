@@ -8,9 +8,10 @@ Code theme.
 ## Status
 
 Markdown Reader is in development and has no release. Of the features in the
-[Features](#features) section, task lists and GitHub alerts work in the Markdown
-preview. Alerts show GitHub's titles and icons but don't have its borders or
-colors. The other features are planned.
+[Features](#features) section, task lists, GitHub alerts, and footnotes work in
+the Markdown preview. Alerts show GitHub's titles and icons but don't have its
+borders or colors. A horizontal rule separates footnotes from the document,
+which GitHub doesn't show. The other features are planned.
 
 ## Features
 
