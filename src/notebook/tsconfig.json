@@ -1,0 +1,11 @@
+{
+  // The notebook renderer runs in the notebook webview, so only this folder
+  // gets the DOM's types. Its tests also run in Node.
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "lib": ["es2023", "dom"],
+    "types": ["node"]
+  },
+  "include": ["."],
+  "exclude": []
+}

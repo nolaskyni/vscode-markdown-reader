@@ -4,6 +4,7 @@
 **/*.map
 AGENTS.md
 fixtures/**
+media/notebook.css
 node_modules/**
 out/**
 plans/**

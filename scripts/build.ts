@@ -1,12 +1,13 @@
 /**
- * @file Bundles the extension and its VS Code integration tests with esbuild,
- *   and writes the license notices of the packages in the extension bundle. Run
- *   it with `npm run build`. Node runs this file directly, so it uses only
- *   erasable TypeScript syntax.
+ * @file Bundles the extension, its notebook renderer, and its VS Code
+ *   integration tests with esbuild, and writes the license notices of the
+ *   packages in the extension and renderer bundles. Run it with `npm run
+ *   build`. Node runs this file directly, so it uses only erasable TypeScript
+ *   syntax.
  */
 
 import {build} from 'esbuild';
-import {glob, rm, writeFile} from 'node:fs/promises';
+import {copyFile, glob, rm, writeFile} from 'node:fs/promises';
 import {
   bundledPackageDirectories,
   readBundledPackage,
@@ -36,10 +37,28 @@ const extensionBuild = await build({
   logLevel: 'info',
 });
 
+// The notebook webview loads the renderer as an ES module, and loads a
+// renderer's other files only from the folder of its entry point. So the
+// renderer gets its own folder, and its stylesheet is copied next to it.
+const notebookRendererBuild = await build({
+  entryPoints: ['src/notebook/renderer.ts'],
+  outfile: 'dist/notebook/renderer.js',
+  bundle: true,
+  format: 'esm',
+  platform: 'browser',
+  target: 'es2023',
+  sourcemap: true,
+  metafile: true,
+  logLevel: 'info',
+});
+await copyFile('media/notebook.css', 'dist/notebook/notebook.css');
+
+const bundledInputs = [
+  ...Object.keys(extensionBuild.metafile.inputs),
+  ...Object.keys(notebookRendererBuild.metafile.inputs),
+];
 const bundledPackages = await Promise.all(
-  bundledPackageDirectories(Object.keys(extensionBuild.metafile.inputs)).map(
-    readBundledPackage,
-  ),
+  bundledPackageDirectories(bundledInputs).map(readBundledPackage),
 );
 await writeFile('ThirdPartyNotices.txt', thirdPartyNotices(bundledPackages));
 

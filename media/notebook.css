@@ -1,0 +1,177 @@
+/* Theme colors and layout. */
+
+/* Each notebook Markdown cell renders into its own shadow root, whose host is
+the cell's element. The built-in Markdown renderer copies this stylesheet into
+every cell after its own styles. Colors come from the theme, as in
+`preview.css`. The `notebook.markup.fontSize` and `notebook.markdown.lineHeight`
+settings set the text size, through the defaults in `package.json`. */
+:host {
+  --markdown-reader-alternate-row-background: color-mix(
+    in srgb,
+    var(--vscode-editor-foreground) 4%,
+    transparent
+  );
+  /* stylelint-disable custom-property-pattern -- VS Code names this theme variable. */
+  --markdown-reader-code-block-background: var(
+    --vscode-textCodeBlock-background
+  );
+  /* stylelint-enable custom-property-pattern */
+  --markdown-reader-divider-color: color-mix(
+    in srgb,
+    var(--vscode-editor-foreground) 18%,
+    transparent
+  );
+  /* stylelint-disable-next-line custom-property-pattern -- VS Code names this theme variable. */
+  --markdown-reader-muted-color: var(--vscode-descriptionForeground);
+}
+
+/* High-contrast themes outline everything in their contrast border color. The
+notebook webview's `body` has the theme class, outside the shadow root. */
+:host-context(.vscode-high-contrast) {
+  /* stylelint-disable-next-line custom-property-pattern -- VS Code names this theme variable. */
+  --markdown-reader-divider-color: var(--vscode-contrastBorder);
+}
+
+/* The renderer puts the cell's HTML in the only `div` at the top of the shadow
+root. Lines are as long as in the preview, but the text stays at the left, in
+line with code cells. The host keeps its full width, because it draws the
+selected cell's background. */
+:host > div {
+  max-width: 42em;
+}
+
+/* Spacing, as in the Markdown preview. */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul,
+pre {
+  margin-top: 0;
+}
+
+p {
+  margin-bottom: 16px;
+}
+
+/* Headings, as in the Markdown preview. A line height in pixels, which
+`notebook.markdown.lineHeight` sets, would make the lines of a wrapped heading
+overlap, so headings set their own. */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 16px;
+  margin-top: 24px;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.25em;
+}
+
+h4 {
+  font-size: 1em;
+}
+
+h5 {
+  font-size: 0.875em;
+}
+
+h6 {
+  font-size: 0.85em;
+}
+
+/* Dividers. */
+
+h1,
+h2 {
+  border-bottom: 1px solid var(--markdown-reader-divider-color);
+  padding-bottom: 0.3em;
+}
+
+hr {
+  border-bottom-color: var(--markdown-reader-divider-color);
+  border-bottom-width: 1px;
+  height: 1px;
+}
+
+/* Code. Blocks look as in the Markdown preview, and a long line scrolls inside
+its block instead of wrapping. */
+
+code {
+  font-family:
+    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono',
+    monospace;
+  font-size: 0.85em;
+}
+
+pre {
+  background-color: var(--markdown-reader-code-block-background);
+  border: 1px solid var(--vscode-widget-border);
+  border-radius: 3px;
+  overflow: auto;
+  padding: 16px;
+}
+
+pre code {
+  white-space: pre;
+}
+
+/* Block quotes. */
+
+blockquote {
+  background-color: transparent;
+  border-left-width: 0.25em;
+  border-radius: 0;
+  color: var(--markdown-reader-muted-color);
+  margin: 0 0 16px;
+  padding: 0 1em;
+}
+
+blockquote > :first-child {
+  margin-top: 0;
+}
+
+blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+/* Tables. A table wider than the cell scrolls on its own, as on GitHub. The
+built-in renderer's table selectors, such as `table > tbody > tr + tr > td`,
+have more type selectors than these, so these start with `:host`. */
+
+table {
+  display: block;
+  margin-bottom: 16px;
+  max-width: 100%;
+  overflow: auto;
+  width: max-content;
+}
+
+:host th,
+:host td {
+  border: 1px solid var(--markdown-reader-divider-color);
+  padding: 6px 13px;
+}
+
+tr:nth-child(2n) {
+  background-color: var(--markdown-reader-alternate-row-background);
+}

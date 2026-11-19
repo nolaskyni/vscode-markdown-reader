@@ -16,7 +16,7 @@
   "main": "./dist/extension.js",
   "scripts": {
     "build": "node scripts/build.ts",
-    "check-types": "tsc",
+    "check-types": "tsc && tsc --project src/notebook",
     "format": "oxfmt",
     "lint": "oxlint --type-aware",
     "lint:css": "stylelint '**/*.css'",
@@ -33,10 +33,12 @@
     "@types/mocha": "10.0.10",
     "@types/node": "26.6.6",
     "@types/vscode": "1.146.0",
+    "@types/vscode-notebook-renderer": "1.72.4",
     "@vscode/test-cli": "0.0.15",
     "@vscode/test-electron": "3.1.0",
     "@vscode/vsce": "4.1.1",
     "esbuild": "0.28.2",
+    "happy-dom": "21.0.4",
     "markdown-it": "15.0.3",
     "markdownlint-cli2": "0.24.1",
     "oxfmt": "0.79.0",
@@ -52,11 +54,23 @@
   "contributes": {
     "configurationDefaults": {
       "markdown.preview.fontSize": 17,
-      "markdown.preview.lineHeight": 1.65
+      "markdown.preview.lineHeight": 1.65,
+      "notebook.markdown.lineHeight": 28,
+      "notebook.markup.fontSize": 17
     },
     "markdown.markdownItPlugins": true,
     "markdown.previewStyles": [
       "./media/preview.css"
+    ],
+    "notebookRenderer": [
+      {
+        "id": "nolaskyni.markdown-reader.notebook-styles",
+        "displayName": "Markdown Reader notebook styles",
+        "entrypoint": {
+          "extends": "vscode.markdown-it-renderer",
+          "path": "./dist/notebook/renderer.js"
+        }
+      }
     ]
   },
   "activationEvents": [],
