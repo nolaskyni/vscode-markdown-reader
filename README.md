@@ -8,8 +8,8 @@ Code theme.
 ## Status
 
 Markdown Reader is in development and has no release. Every feature in the
-[Features](#features) section works in the Markdown preview. Styling for
-notebook Markdown cells is planned.
+[Features](#features) section works in the Markdown preview and in notebook
+Markdown cells.
 
 ## Features
 
@@ -32,10 +32,16 @@ render them either.
 Colors come from the active VS Code theme, including high-contrast themes.
 Markdown Reader doesn't change your Markdown files, and it works offline.
 
-Markdown Reader sets the preview's text to 17 pixels with a line height of 1.65
-by changing the defaults of the `markdown.preview.fontSize` and
-`markdown.preview.lineHeight` settings, so your own values for those settings
-still apply.
+Markdown Reader sets the text size by changing the defaults of the following
+settings, so your own values for those settings still apply:
+
+| Where                   | Font size setting               | Line height setting                 |
+| ----------------------- | ------------------------------- | ----------------------------------- |
+| Markdown preview        | `markdown.preview.fontSize`: 17 | `markdown.preview.lineHeight`: 1.65 |
+| Notebook Markdown cells | `notebook.markup.fontSize`: 17  | `notebook.markdown.lineHeight`: 28  |
+
+The font sizes are in pixels. The notebook line height is in pixels, and the
+preview line height is a multiple of the font size.
 
 ## AI Usage
 
