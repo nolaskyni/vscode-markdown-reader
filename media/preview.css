@@ -197,6 +197,16 @@ as a top border. */
   font-size: 0.85em;
 }
 
+/* The heading names the notes for screen readers only, as GitHub's does. */
+.footnotes-heading {
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
 .footnotes-list {
   padding-left: 1em;
 }

@@ -33,6 +33,7 @@ describe('addFootnotes', () => {
         '<p>End.</p>\n' +
         '<hr class="footnotes-sep">\n' +
         '<section class="footnotes">\n' +
+        '<h2 class="footnotes-heading">Footnotes</h2>\n' +
         '<ol class="footnotes-list">\n' +
         '<li id="footnote1" class="footnote-item"><p>The source. ' +
         '<a href="#footnote-ref1" class="footnote-backref" ' +

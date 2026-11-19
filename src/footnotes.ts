@@ -35,8 +35,34 @@ interface FootnotePosition {
 export function addFootnotes(markdownIt: MarkdownIt): void {
   markdownIt.use(footnote);
   markdownIt.inline.ruler.disable('footnoteInline');
+  markdownIt.renderer.rules['footnote_block_open'] = renderFootnoteBlockOpen;
   markdownIt.renderer.rules['footnote_caption'] = renderFootnoteCaption;
   markdownIt.renderer.rules['footnote_anchor'] = renderFootnoteBackLink;
+}
+
+/**
+ * Renders the start of the notes: the plugin's separator, section, and list,
+ * with a "Footnotes" heading at the start of the section, as on GitHub. The
+ * stylesheet hides the heading, so that only screen readers announce it.
+ *
+ * @param tokens - The document's tokens.
+ * @param index - The position of the `footnote_block_open` token in `tokens`.
+ * @param options - The markdown-it options, whose `xhtmlOut` closes the
+ *   separator as XHTML.
+ * @returns The HTML that opens the notes.
+ */
+function renderFootnoteBlockOpen(
+  tokens: readonly Token[],
+  index: number,
+  options: Required<MarkdownItOptions>,
+): string {
+  const separatorEnd = options.xhtmlOut ? ' />' : '>';
+  return (
+    `<hr class="footnotes-sep"${separatorEnd}\n` +
+    '<section class="footnotes">\n' +
+    '<h2 class="footnotes-heading">Footnotes</h2>\n' +
+    '<ol class="footnotes-list">\n'
+  );
 }
 
 /**

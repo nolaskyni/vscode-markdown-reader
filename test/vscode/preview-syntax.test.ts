@@ -69,4 +69,13 @@ suite('markdown.api.render', () => {
       /<li id="footnote1" class="footnote-item"><p [^>]*>The source\. <a href="#footnote-ref1" class="footnote-backref" aria-label="Back to reference 1">/,
     );
   });
+
+  test('starts the footnotes with a heading for screen readers', async () => {
+    const html = await render('A claim.[^source]\n\n[^source]: The source.\n');
+
+    assert.match(
+      html,
+      /<section class="footnotes">\n<h2 class="footnotes-heading">Footnotes<\/h2>\n<ol class="footnotes-list">/,
+    );
+  });
 });
