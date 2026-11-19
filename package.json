@@ -1,7 +1,7 @@
 {
   "name": "markdown-reader",
   "displayName": "Markdown Reader",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "description": "Styles the Markdown preview and notebook Markdown cells for comfortable reading.",
   "categories": [
