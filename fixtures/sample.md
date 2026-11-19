@@ -74,6 +74,11 @@ sentence has a long footnote.[^long]
 Expected: each reference is a superscript link to its note at the end of the
 document, and each note links back to every reference to it.
 
+A sentence with an inline footnote.^[An inline note.]
+
+Expected: with the `markdownReader.preview.flavor` setting at its default,
+`github`, the inline footnote stays literal text, with its caret and brackets.
+
 [^first]: The first footnote.
 
 [^long]: A long footnote with two paragraphs.

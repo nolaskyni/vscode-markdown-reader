@@ -9,7 +9,8 @@ Code theme.
 
 Markdown Reader is in development and has no release. Every feature in the
 [Features](#features) section works in the Markdown preview and in notebook
-Markdown cells.
+Markdown cells. The Obsidian flavor, described in the
+[Markdown Flavors](#markdown-flavors) section, is incomplete.
 
 ## Features
 
@@ -42,6 +43,33 @@ settings, so your own values for those settings still apply:
 
 The font sizes are in pixels. The notebook line height is in pixels, and the
 preview line height is a multiple of the font size.
+
+## Markdown Flavors
+
+The `markdownReader.preview.flavor` setting picks the Markdown flavor that the
+preview renders. Notebook Markdown cells don't use it. The setting takes the
+following values:
+
+- `github`, the default: the syntax in the [Features](#features) section
+- `obsidian`: the GitHub flavor's syntax, plus inline footnotes, such as
+  `^[text]`
+
+The Obsidian flavor is in development. Of Obsidian's own syntax, it renders only
+inline footnotes, and links to notes, callouts, and other syntax stay text.
+
+To use a flavor for one workspace folder, such as an Obsidian vault, set it in
+the folder's `.vscode/settings.json` file. If Obsidian shows each line break in
+a paragraph of your notes as a break, also set VS Code's
+`markdown.preview.breaks` setting, so that the preview shows them the same way,
+as in the following file:
+
+<!-- prettier-ignore -->
+```json
+{
+    "markdownReader.preview.flavor": "obsidian",
+    "markdown.preview.breaks": true
+}
+```
 
 ## Install from Source
 

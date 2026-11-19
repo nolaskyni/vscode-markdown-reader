@@ -20,3 +20,8 @@ max_line_length = 80
 # section also lists `.vscode/*.json` for the folder at the project root.
 [{.vscode/*.json,**/.vscode/*.json,**.code-workspace,**/Code/User/**.json}]
 indent_size = 4
+
+# Obsidian notes keep each paragraph on one line, which Obsidian wraps to the
+# window.
+[fixtures/obsidian-vault/**.md]
+max_line_length = off

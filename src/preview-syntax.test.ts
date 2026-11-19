@@ -73,4 +73,25 @@ describe('addPreviewSyntax', () => {
     expect(html).toContain('<sup class="footnote-ref">');
     expect(html).toContain('aria-label="Back to reference 1"');
   });
+
+  test('renders inline footnotes in the Obsidian flavor only', () => {
+    const markdownIt = addPreviewSyntax(new MarkdownIt({html: true}), {
+      flavorOf: (environment) =>
+        environment['isObsidian'] === true ? 'obsidian' : 'github',
+    });
+    const source = 'Text.^[An inline note.]\n';
+
+    expect(markdownIt.render(source, {isObsidian: true})).toContain(
+      '<sup class="footnote-ref">',
+    );
+    expect(markdownIt.render(source, {isObsidian: false})).toBe(
+      new MarkdownIt({html: true}).render(source),
+    );
+  });
+
+  test('uses the GitHub flavor without `flavorOf`', () => {
+    const source = 'Text.^[An inline note.]\n';
+
+    expect(render(source)).toBe(new MarkdownIt({html: true}).render(source));
+  });
 });

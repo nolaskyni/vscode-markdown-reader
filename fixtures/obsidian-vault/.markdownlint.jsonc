@@ -1,0 +1,9 @@
+{
+  "extends": "../../.markdownlint.jsonc",
+  // Each paragraph is one line, which Obsidian wraps to the window.
+  "line-length": false,
+  // Obsidian shows the file name as the note's title, so sections start at `#`
+  // and a note can start without a heading.
+  "single-title": false,
+  "first-line-heading": false
+}

@@ -4,6 +4,7 @@
  */
 
 import MarkdownIt from 'markdown-it';
+import type {Env} from 'markdown-it';
 import {describe, expect, test} from 'vitest';
 import {addFootnotes} from './footnotes.ts';
 
@@ -99,5 +100,36 @@ describe('addFootnotes', () => {
     ['inline code', '`Text.[^note]`\n\n```text\n[^note]: Note.\n```\n'],
   ])('leaves footnote syntax in %s unrendered', (_, source) => {
     expect(render(source)).toBe(new MarkdownIt({html: true}).render(source));
+  });
+
+  test('renders an inline footnote when `areInlineFootnotesRendered` is true', () => {
+    const html = new MarkdownIt({html: true})
+      .use(addFootnotes, {areInlineFootnotesRendered: () => true})
+      .render('Text.^[An inline note.]\n');
+
+    expect(html).toContain(
+      '<p>Text.<sup class="footnote-ref"><a href="#footnote1">1</a>' +
+        '<a class="footnote-anchor" id="footnote-ref1"></a></sup></p>\n',
+    );
+    expect(html).toContain(
+      '<li id="footnote1" class="footnote-item"><p>An inline note. ' +
+        '<a href="#footnote-ref1" class="footnote-backref" ' +
+        `aria-label="Back to reference 1">${BACK_ARROW}</a></p>\n`,
+    );
+  });
+
+  test('passes the render environment to `areInlineFootnotesRendered`', () => {
+    const markdownIt = new MarkdownIt({html: true}).use(addFootnotes, {
+      areInlineFootnotesRendered: (environment: Env) =>
+        environment['isObsidian'] === true,
+    });
+    const source = 'Text.^[An inline note.]\n';
+
+    expect(markdownIt.render(source, {isObsidian: true})).toContain(
+      '<sup class="footnote-ref">',
+    );
+    expect(markdownIt.render(source, {isObsidian: false})).toBe(
+      new MarkdownIt({html: true}).render(source),
+    );
   });
 });

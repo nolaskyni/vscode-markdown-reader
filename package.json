@@ -52,6 +52,29 @@
     "vitest": "5.1.0"
   },
   "contributes": {
+    "configuration": {
+      "title": "Markdown Reader",
+      "properties": {
+        "markdownReader.preview.flavor": {
+          "type": "string",
+          "enum": [
+            "github",
+            "obsidian"
+          ],
+          "enumItemLabels": [
+            "GitHub",
+            "Obsidian"
+          ],
+          "markdownEnumDescriptions": [
+            "GitHub Flavored Markdown, with task lists, alerts, and footnotes.",
+            "Obsidian Flavored Markdown. Adds inline footnotes, such as `^[text]`, to the GitHub flavor."
+          ],
+          "default": "github",
+          "scope": "resource",
+          "markdownDescription": "The Markdown flavor that the Markdown preview renders. Notebook Markdown cells don't use it."
+        }
+      }
+    },
     "configurationDefaults": {
       "markdown.preview.fontSize": 17,
       "markdown.preview.lineHeight": 1.65,

@@ -24,5 +24,8 @@ follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   through VS Code's own font size and line height settings
 - Support for Restricted Mode, so that untrusted workspaces get the same
   rendering
+- The `markdownReader.preview.flavor` setting, which picks the Markdown flavor
+  that the preview renders: `github`, the default, or `obsidian`, which adds
+  inline footnotes, such as `^[text]`
 
 [unreleased]: https://github.com/nolaskyni/vscode-markdown-reader/commits/main

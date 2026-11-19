@@ -8,6 +8,8 @@ import type {
   Renderer,
   Token,
 } from 'markdown-it';
+import {gateRule} from './flavor.ts';
+import type {RenderPredicate} from './flavor.ts';
 
 /**
  * The text of a footnote's back link: a leftwards arrow with hook, followed by
@@ -15,6 +17,15 @@ import type {
  * in the footnote plugin's own back links.
  */
 const BACK_ARROW = '\u21A9\uFE0E';
+
+/** Options for `addFootnotes`. */
+export interface FootnoteOptions {
+  /**
+   * Returns whether a render shows inline footnotes, such as `^[text]`. By
+   * default, no render does.
+   */
+  readonly areInlineFootnotesRendered?: RenderPredicate;
+}
 
 /** Where a footnote reference or back link sits among the document's notes. */
 interface FootnotePosition {
@@ -28,13 +39,22 @@ interface FootnotePosition {
  * Adds footnotes to a markdown-it instance. References render as superscript
  * links numbered in order of first reference, as on GitHub. The notes follow
  * the document, and each note links back to every reference to it. Inline
- * footnotes, such as `^[text]`, stay text, because GitHub doesn't render them.
+ * footnotes, such as `^[text]`, render only where `areInlineFootnotesRendered`
+ * allows, because GitHub doesn't render them but Obsidian does.
  *
  * @param markdownIt - The instance to extend, which this function changes.
+ * @param options - Which renders show inline footnotes.
  */
-export function addFootnotes(markdownIt: MarkdownIt): void {
+export function addFootnotes(
+  markdownIt: MarkdownIt,
+  {areInlineFootnotesRendered = (): boolean => false}: FootnoteOptions = {},
+): void {
   markdownIt.use(footnote);
-  markdownIt.inline.ruler.disable('footnoteInline');
+  gateRule(
+    markdownIt.inline.ruler,
+    'footnoteInline',
+    areInlineFootnotesRendered,
+  );
   markdownIt.renderer.rules['footnote_block_open'] = renderFootnoteBlockOpen;
   markdownIt.renderer.rules['footnote_caption'] = renderFootnoteCaption;
   markdownIt.renderer.rules['footnote_anchor'] = renderFootnoteBackLink;
