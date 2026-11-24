@@ -36,13 +36,12 @@ Markdown Reader doesn't change your Markdown files, and it works offline.
 Markdown Reader sets the text size by changing the defaults of the following
 settings, so your own values for those settings still apply:
 
-| Where                   | Font size setting               | Line height setting                 |
-| ----------------------- | ------------------------------- | ----------------------------------- |
-| Markdown preview        | `markdown.preview.fontSize`: 17 | `markdown.preview.lineHeight`: 1.65 |
-| Notebook Markdown cells | `notebook.markup.fontSize`: 17  | `notebook.markdown.lineHeight`: 28  |
-
-The font sizes are in pixels. The notebook line height is in pixels, and the
-preview line height is a multiple of the font size.
+| VS Code setting                | Default                  |
+| ------------------------------ | ------------------------ |
+| `markdown.preview.fontSize`    | 17 pixels                |
+| `markdown.preview.lineHeight`  | 1.65 times the font size |
+| `notebook.markup.fontSize`     | 17 pixels                |
+| `notebook.markdown.lineHeight` | 28 pixels                |
 
 ## Markdown Flavors
 
