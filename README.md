@@ -33,15 +33,15 @@ render them either.
 Colors come from the active VS Code theme, including high-contrast themes.
 Markdown Reader doesn't change your Markdown files, and it works offline.
 
-Markdown Reader sets the text size by changing the defaults of the following
-settings, so your own values for those settings still apply:
+Markdown Reader uses a 17-pixel font size for the Markdown preview and notebook
+Markdown cells by default. It sets the line height separately for each view:
 
-| VS Code setting                | Default                  |
-| ------------------------------ | ------------------------ |
-| `markdown.preview.fontSize`    | 17 pixels                |
-| `markdown.preview.lineHeight`  | 1.65 times the font size |
-| `notebook.markup.fontSize`     | 17 pixels                |
-| `notebook.markdown.lineHeight` | 28 pixels                |
+- In the Markdown preview, `markdown.preview.lineHeight` defaults to 1.65 times
+  the font size. Use `markdown.preview.fontSize` to change the font size.
+- In notebook Markdown cells, `notebook.markdown.lineHeight` defaults to 28
+  pixels. Use `notebook.markup.fontSize` to change the font size.
+
+Your own values for these settings still take precedence.
 
 ## Markdown Flavors
 
