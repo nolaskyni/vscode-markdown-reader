@@ -86,6 +86,15 @@ Markdown Reader, follow these steps:
 
 For changes by version, see the [changelog](CHANGELOG.md).
 
+## Report a Bug
+
+To report a rendering bug,
+[open a GitHub issue](https://github.com/nolaskyni/vscode-markdown-reader/issues).
+Include your VS Code version and theme, where the problem appears (the Markdown
+preview or a notebook cell), and a short Markdown example that reproduces it. If
+the problem is in the preview, include your `markdownReader.preview.flavor`
+setting.
+
 ## AI Usage
 
 AI assists with designing, writing, reviewing, and testing the extension, with
