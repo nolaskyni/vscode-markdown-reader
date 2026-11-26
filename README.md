@@ -1,81 +1,52 @@
 # Markdown Reader
 
-Markdown Reader is a VS Code extension that styles the built-in Markdown preview
-and notebook Markdown cells for comfortable reading. It uses system fonts,
-reading-focused spacing, and GitHub-style structure, with colors from your VS
-Code theme.
+Markdown Reader styles the built-in VS Code Markdown preview and notebook
+Markdown cells with system fonts, more space between lines, and colors from your
+theme, including high-contrast themes. The preview also renders read-only task
+lists, GitHub alerts, and footnotes. Notebook cells get styling only.
 
-## Status
+Markdown Reader has no release. [Install it from source](#install-from-source).
 
-Markdown Reader is in development and has no release. Every feature in the
-[Features](#features) section works in the Markdown preview and in notebook
-Markdown cells. The Obsidian flavor, described in the
-[Markdown Flavors](#markdown-flavors) section, is incomplete.
+## Use Markdown Reader
 
-## Features
+Open a Markdown file and run **Markdown: Open Preview** from the Command
+Palette. Markdown Reader styles notebook Markdown cells when they render. It
+works offline and doesn't change your files.
 
-In the Markdown preview, Markdown Reader adds the following:
+## Settings
 
-- Typography and spacing for reading, with system fonts and a comfortable line
-  length
-- GitHub-style structure: heading dividers, code block backgrounds, table
-  borders with alternating row backgrounds, and block quote borders
-- Task lists, shown as checkboxes that you can't toggle
-- GitHub alerts of the types `NOTE`, `TIP`, `IMPORTANT`, `WARNING`, and
-  `CAUTION`
-- Footnotes, with links from each reference to its note and back
+Your settings override these defaults:
 
-In notebook Markdown cells, Markdown Reader applies the same typography and
-structure but adds no syntax. Task lists, alerts, and footnotes appear as VS
-Code shows them without the extension, because GitHub's notebook viewer doesn't
-render them either.
+| View     | Setting                        | Default                  |
+| -------- | ------------------------------ | ------------------------ |
+| Preview  | `markdown.preview.fontSize`    | 17 pixels                |
+| Preview  | `markdown.preview.lineHeight`  | 1.65 times the font size |
+| Notebook | `notebook.markup.fontSize`     | 17 pixels                |
+| Notebook | `notebook.markdown.lineHeight` | 28 pixels                |
 
-Colors come from the active VS Code theme, including high-contrast themes.
-Markdown Reader doesn't change your Markdown files, and it works offline.
+The `markdownReader.preview.flavor` setting applies only to the preview:
 
-Markdown Reader uses a 17-pixel font size for the Markdown preview and notebook
-Markdown cells by default. It sets the line height separately for each view:
+- `github` (default): Renders task lists, GitHub alerts, and footnotes.
+- `obsidian`: Adds inline footnotes (`^[text]`) to `github`. Other Obsidian
+  syntax, such as links to notes and callouts, appears as plain text.
 
-- In the Markdown preview, `markdown.preview.lineHeight` defaults to 1.65 times
-  the font size. Use `markdown.preview.fontSize` to change the font size.
-- In notebook Markdown cells, `notebook.markdown.lineHeight` defaults to 28
-  pixels. Use `notebook.markup.fontSize` to change the font size.
-
-Your own values for these settings still take precedence.
-
-## Markdown Flavors
-
-The `markdownReader.preview.flavor` setting picks the Markdown flavor that the
-preview renders. Notebook Markdown cells don't use it. The setting takes the
-following values:
-
-- `github`, the default: the syntax in the [Features](#features) section
-- `obsidian`: the GitHub flavor's syntax, plus inline footnotes, such as
-  `^[text]`
-
-The Obsidian flavor is in development. Of Obsidian's own syntax, it renders only
-inline footnotes, and links to notes, callouts, and other syntax stay text.
-
-To use a flavor for one workspace folder, such as an Obsidian vault, set it in
-the folder's `.vscode/settings.json` file. If Obsidian shows each line break in
-a paragraph of your notes as a break, also set VS Code's
-`markdown.preview.breaks` setting, so that the preview shows them the same way,
-as in the following file:
+To set the flavor for one workspace folder, such as an Obsidian vault, use the
+folder's `.vscode/settings.json` file:
 
 <!-- prettier-ignore -->
 ```json
 {
-    "markdownReader.preview.flavor": "obsidian",
-    "markdown.preview.breaks": true
+    "markdownReader.preview.flavor": "obsidian"
 }
 ```
 
+To preserve line breaks within paragraphs in the preview, also set
+`markdown.preview.breaks` to `true`.
+
 ## Install from Source
 
-Markdown Reader has no release, so you build it from source and install the
-package. You need VS Code 1.146 or later, Git, and Node.js 22.18 or later.
-
-To build and install Markdown Reader, follow these steps:
+You need VS Code 1.146 or later, Git, and Node.js 22.18 or later. To install
+Markdown Reader, follow these steps:
 
 1. Clone the repository:
 
@@ -95,32 +66,25 @@ To build and install Markdown Reader, follow these steps:
    npm ci
    ```
 
-   npm might warn that a development tool needs a later release of Node.js, or
-   that it didn't run some install scripts. The build doesn't need that tool or
-   those scripts.
+   On Node.js 22.18, npm can warn that Stylelint requires Node.js 22.22.2 or
+   later. Packaging doesn't use Stylelint.
 
-4. Build Markdown Reader, and package it as a VSIX file, the package format of
-   VS Code extensions:
+4. Build and package the extension:
 
    ```sh
    npx vsce package
    ```
 
-   The command writes the `markdown-reader-0.1.0.vsix` file to the repository's
-   folder.
-
-5. Install the package:
+5. Install the VSIX package:
 
    ```sh
    code --install-extension markdown-reader-0.1.0.vsix
    ```
 
-   If the `code` command isn't available, install the package from VS Code
-   instead. In the Command Palette, run **Extensions: Install from VSIX...**,
-   and select the `markdown-reader-0.1.0.vsix` file.
+   If `code` isn't available, run **Extensions: Install from VSIX...** from the
+   Command Palette and select the `markdown-reader-0.1.0.vsix` file.
 
-For more information about the changes in each version, see the
-[changelog](CHANGELOG.md).
+For changes by version, see the [changelog](CHANGELOG.md).
 
 ## AI Usage
 
